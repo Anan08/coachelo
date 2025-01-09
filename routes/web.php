@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoachController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Models\Game;
@@ -40,11 +41,12 @@ Route::get('/games/{game_id}', [CoachController::class, 'show']);
 Route::get('/orders', [CoachController::class, 'check_orders']);
 Route::get('/trolley', [UserController::class, 'get_orders']);
 
-Route::get('/users', function () {
-    return view("users");
-});
+Route::get('/users', [UserController::class, 'get_user']);
 
 Route::get('/applicances', [CoachController::class, 'get_applicances']);
+
+Route::get('/add-game', function() {return view('add_game');});
+Route::post('/add-game', [GameController::class, 'add_game']);
 
 Route::post('/store_cv', [CoachController::class, 'store_cv']);
 

@@ -10,7 +10,7 @@
                 <div class="flex items-center">
                     <!-- Coach Profile Picture -->
                     <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-200">
-                        <img src="https://via.placeholder.com/50" alt="Coach Profile" class="w-full h-full object-cover">
+                        <img src="{{Storage::url($applicance->user->profile_pic)}}" alt="Coach Profile" class="w-full h-full object-cover">
                     </div>
                     <!-- Coach Info -->
                     <div class="ml-4">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -83,7 +84,8 @@ class UserController extends Controller
     public function index( ) {
         $loggedId = session()->get('id');
         if ($loggedId) {
-            return view('home');
+            $games = Game::get();
+            return view('home', ['games' => $games]);
         } else {
             return view('landing'); 
         }
@@ -131,4 +133,9 @@ class UserController extends Controller
         return view('trolley', ['transactions' => $transaction]);
     }
         
+    public function get_user() {
+        $users = User::get();
+        return view('users', ['users' => $users]);
+    }
+
 }

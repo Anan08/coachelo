@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailForm;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Mail;
 
 class TransactionController extends Controller
 {
@@ -31,6 +34,20 @@ class TransactionController extends Controller
                 'session_id' => $req->sessions,
             ]
         );
+
+
+        $details = [
+            'amount' => $req->amount,
+            'coach_id' => $req->coach_id,
+            'session_date' => $req->date,
+            'buyer_id' => session()->get('id'),
+            'isFinished' => false,
+            'isPaid' => false,
+            'game_id' => $req->game_id,
+            'status' => 'pending',
+            'transaction_date' => now(),
+            'session_id' => $req->sessions,
+        ];
         // $transaction->amount = $req->amount;
         // $transaction->buyer_id = session()->get('id');
         // $transaction->coach_id = $req->coach_id;
@@ -43,7 +60,11 @@ class TransactionController extends Controller
         // $transaction->game_id = $req->game_id;
         // $transaction->save();
 
-        return redirect('/coaches/'.$req->coach_id)->with('success', 'Transaction created successfully');
+        $user = User::where('id',session()->get('id'))->first();
+        $email = $user->email; 
+        Mail::to($email)->send(new MailForm($details));
+
+        return redirect('/coaches/'.$req->coach_id)->with('success', 'An Email was Sent to your account email!');
         
     }
 

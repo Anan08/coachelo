@@ -33,6 +33,10 @@
                             <span class="material-icons"><img src="https://www.svgrepo.com/show/497576/task-square.svg" alt="" class="size-6"></span>
                             <span>Applicances</span>
                         </a>                       
+                        <a href="/add-game" class="{{request()->is('add-game') ?  'bg-indigo-600 text-white': 'text-gray-600 hover:text-indigo-600' }} flex items-center p-2 rounded-lg space-x-3">
+                            <span class="material-icons"><img src="https://www.svgrepo.com/show/497576/task-square.svg" alt="" class="size-6"></span>
+                            <span>Add Game</span>
+                        </a>                                           
                     @endif
                     
 
